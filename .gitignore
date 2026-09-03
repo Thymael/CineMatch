@@ -223,3 +223,6 @@ data/raw/*
 
 data/processed/*
 !data/processed/.gitkeep
+
+# Notebook personnel utilisé comme brouillon
+notebooks/Brouillon.ipynb
