@@ -4,7 +4,7 @@ import requests
 from dotenv import load_dotenv
 
 
-URL_AUTHENTIFICATION = "https://api.themoviedb.org/3/authentication"
+URL_BASE = "https://api.themoviedb.org/3"
 DELAI_MAX = 10                                                        # Évite une requête bloquée
 
 
@@ -21,20 +21,24 @@ def creer_entetes(token):
         "Authorization": f"Bearer {token}"
     }
 
-
-def verifier_connexion():
-    load_dotenv()                                                       # Charge les variables de .env
-    token = valider_token(os.getenv("TMDB_TOKEN"))                      # Récupère et contrôle le token
-    entetes = creer_entetes(token)                                      # Prépare l'autorisation TMDb
+def requete_tmdb(endpoint, params=None):
+    load_dotenv()                                                       # Charge le fichier .env
+    token = valider_token(os.getenv("TMDB_TOKEN"))                      # Récupère le token
+    entetes = creer_entetes(token)                                      # Prépare l'autorisation
 
     reponse = requests.get(
-        URL_AUTHENTIFICATION,
+        f"{URL_BASE}{endpoint}",
         headers=entetes,
+        params=params,
         timeout=DELAI_MAX
     )
 
-    reponse.raise_for_status()                                          # Déclenche une erreur HTTP si nécessaire
-    donnees = reponse.json()
+    reponse.raise_for_status()                                          # Contrôle la réponse HTTP
+
+    return reponse.json()
+
+def verifier_connexion():
+    donnees = requete_tmdb("/authentication")                           # Utilise la fonction générale
 
     return donnees.get("success", False)
 
