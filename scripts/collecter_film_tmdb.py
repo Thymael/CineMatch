@@ -6,7 +6,13 @@ import requests
 from scripts.verifier_connexion_tmdb import requete_tmdb
 
 
-FILM_ID = 550                                                         # Identifiant TMDb de Fight Club
+FILMS_IDS = [
+    550,                                                               # Fight Club
+    13,                                                                # Forrest Gump
+    680,                                                               # Pulp Fiction
+    155,                                                               # The Dark Knight
+    27205                                                              # Inception
+]                                      
 DOSSIER_SORTIE = Path("data/raw/tmdb")
 
 
@@ -31,13 +37,20 @@ def enregistrer_film(film):
 
 
 if __name__ == "__main__":
-    try:
-        film = recuperer_film(FILM_ID)
-        chemin = enregistrer_film(film)
+    films_recuperes = 0
 
-        print(f"🎬 Film récupéré : {film['title']}")
-        print(f"💾 Fichier créé : {chemin}")
+    for film_id in FILMS_IDS:
+        try:
+            film = recuperer_film(film_id)
+            chemin = enregistrer_film(film)
+            films_recuperes += 1
 
-    except (ValueError, requests.exceptions.RequestException) as erreur:
-        print(f"❌ Collecte impossible : {erreur}")
+            print(f"✅ {film['title']} enregistré dans {chemin}")
+
+        except (ValueError, requests.exceptions.RequestException) as erreur:
+            print(f"❌ Film {film_id} non récupéré : {erreur}")
+
+    print(f"\n🎬 Collecte terminée : {films_recuperes}/{len(FILMS_IDS)} films.")
+
+    if films_recuperes != len(FILMS_IDS):
         raise SystemExit(1)
