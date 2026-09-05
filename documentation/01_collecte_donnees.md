@@ -94,3 +94,50 @@ Cette première version utilise seulement les 100 films les plus évalués.
 Cet échantillon est adapté aux tests du pipeline, mais il favorise les films populaires et ne représente pas tout le catalogue MovieLens.
 
 Une fois le pipeline validé, la collecte pourra être étendue à davantage de films.
+
+## Chargement dans Google Cloud
+
+### Stockage dans Cloud Storage
+
+Les données sont conservées dans le bucket `cinematch-bucket`, situé dans la région `US`.
+
+Deux zones sont utilisées :
+
+- `raw` contient les fichiers originaux de MovieLens et de TMDb ;
+- `prepared` contient les fichiers remis en forme pour leur chargement dans BigQuery.
+
+Les 100 réponses TMDb originales sont conservées séparément. Elles sont également
+regroupées dans un fichier NDJSON contenant un film par ligne.
+
+Fichier préparé :
+
+`gs://cinematch-bucket/prepared/tmdb/films_tmdb.ndjson`
+
+Cette préparation ne modifie pas les informations métier. Elle adapte uniquement le
+format des fichiers aux besoins de BigQuery.
+
+### Tables de réception BigQuery
+
+Les données sont chargées dans le dataset `cinematch_landing` du projet
+`cinematch-507613`.
+
+| Table | Nombre de lignes | Contenu |
+|---|---:|---|
+| `movielens_movies` | 9 742 | Titres et genres des films |
+| `movielens_links` | 9 742 | Correspondances MovieLens, IMDb et TMDb |
+| `movielens_ratings` | 100 836 | Notes attribuées par les utilisateurs |
+| `movielens_tags` | 3 683 | Mots-clés ajoutés par les utilisateurs |
+| `tmdb_films` | 100 | Informations détaillées provenant de TMDb |
+
+### Contrôles réalisés
+
+Les contrôles ont permis de vérifier :
+
+- l'absence de doublons sur les identifiants des films ;
+- l'absence de notes en dehors de l'échelle autorisée ;
+- l'absence de relations vers des films inconnus ;
+- la présence des crédits, mots-clés et identifiants IMDb dans les données TMDb ;
+- l'unicité des 100 films collectés depuis TMDb.
+
+Huit films MovieLens ne possèdent pas d'identifiant TMDb. Cette limite concerne environ
+0,08 % du catalogue et ne bloque pas la suite du projet.
