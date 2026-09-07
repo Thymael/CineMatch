@@ -64,19 +64,47 @@ du pipeline principal.
 - workflow GitHub Actions ;
 - README et documentation technique.
 
-## 6. Méthode de travail
+## 6. Méthode de travail et clean code
 
-Chaque étape suivra la même organisation :
+Chaque étape du projet suivra la même organisation :
 
-1. expliquer simplement l'objectif et les notions utilisées ;
-2. créer ou modifier un petit nombre de fichiers ;
-3. exécuter les tests adaptés à l'étape ;
-4. vérifier les données obtenues ;
+1. expliquer simplement l'objectif ;
+2. modifier un petit nombre de fichiers ;
+3. vérifier que le comportement reste correct ;
+4. contrôler les données produites ;
 5. mettre à jour la documentation ;
-6. valider l'étape avant de passer à la suivante.
+6. valider l'étape avant de continuer.
 
-Le code restera volontairement simple et lisible. Les noms seront explicites, les fonctions seront
-courtes et les commentaires importants seront placés à droite des lignes lorsque cela reste lisible.
+### Règles d'écriture du code
+
+Le projet appliquera les règles suivantes :
+
+- les variables auront des noms explicites ;
+- les fonctions commenceront par un verbe ;
+- chaque fonction aura une seule responsabilité ;
+- les traitements répétés seront regroupés dans une fonction ;
+- les valeurs importantes seront placées dans des constantes ;
+- les fonctions réutilisables auront une docstring et des annotations de types simples ;
+- les commentaires expliqueront un choix ou un cas particulier, pas une ligne évidente ;
+- le code inutilisé ou commenté sera supprimé ;
+- les secrets et les données locales ne seront jamais publiés sur GitHub.
+
+Les commentaires courts pourront être placés à droite du code lorsqu'ils restent lisibles.
+Les explications plus longues seront placées au-dessus du bloc concerné.
+
+### Méthode de refactorisation
+
+Avant de refactoriser un script :
+
+1. exécuter le script et noter son résultat ;
+2. effectuer les modifications sans ajouter de nouvelle fonctionnalité ;
+3. vérifier la syntaxe avec `py_compile` ;
+4. relancer les tests automatisés ;
+5. réexécuter le script ;
+6. comparer le nouveau résultat avec le résultat de référence.
+
+Une refactorisation est validée uniquement si le comportement et les données obtenues
+restent identiques.
 
 ## 7. Tests à prévoir dès le début
 

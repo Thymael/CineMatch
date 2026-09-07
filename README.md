@@ -1,23 +1,64 @@
 # CinéMatch
 
-CinéMatch est un projet data consacré à l'analyse et à la recommandation de films.
+CinéMatch est un projet data consacré à l'analyse de films et à la recommandation
+personnalisée.
 
 ## Objectif
 
-Construire un pipeline complet permettant de collecter, stocker, transformer et analyser des
-données cinématographiques, puis de recommander des films à un utilisateur.
+Croiser plusieurs sources cinématographiques afin de construire un pipeline de données,
+réaliser une analyse exploratoire et recommander des films à un utilisateur.
 
-## Sources prévues
+## Pipeline
 
-- TMDb pour les informations descriptives des films ;
-- MovieLens pour les notes des utilisateurs ;
-- OMDb pour les scores externes ;
-- Spotify et New York Times comme extensions.
+```text
+TMDb + MovieLens → Python → GCS → BigQuery → dbt → EDA et ML → Power BI et Streamlit
+```
 
-## Technologies prévues
+## Sources de données
 
-Python, Google Cloud Storage, BigQuery, dbt, Power BI, machine learning et Streamlit.
+- **MovieLens Latest Small** : 9 742 films et 100 836 notes utilisateurs ;
+- **TMDb** : fiches détaillées de 100 films pour le prototype ;
+- **OMDb, Spotify et New York Times** : enrichissements prévus ultérieurement.
 
-## État du projet
+## Installation
 
-Projet en cours de construction — préparation de l'environnement et de l'arborescence.
+```bash
+python -m venv .venv
+source .venv/Scripts/activate
+python -m pip install -r requirements.txt
+cp .env.example .env
+```
+
+Ajouter ensuite le token TMDb dans le fichier `.env` :
+
+```text
+TMDB_TOKEN=mon_token
+```
+
+## Exécution
+
+Les commandes doivent être lancées depuis la racine du projet :
+
+```bash
+python -m scripts.telecharger_movielens
+python -m scripts.verifier_donnees_movielens
+python -m scripts.verifier_connexion_tmdb
+python -m scripts.collecter_film_tmdb
+python -m scripts.preparer_tmdb_bigquery
+python -m pytest -q
+```
+
+## Avancement
+
+- [x] Collecte MovieLens et TMDb
+- [x] Stockage dans Google Cloud Storage
+- [x] Chargement et contrôle dans BigQuery
+- [ ] Transformation avec dbt
+- [ ] Analyse exploratoire et Power BI
+- [ ] Modèles de recommandation
+- [ ] Application Streamlit
+
+## Documentation
+
+- [Cadrage du projet](documentation/00_cadrage_projet_cinematch.md)
+- [Collecte et stockage des données](documentation/01_collecte_donnees.md)
