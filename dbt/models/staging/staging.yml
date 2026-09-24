@@ -119,3 +119,23 @@ models:
         description: "Identifiant de la collection TMDb si le film appartient à une collection."
       - name: collection_name
         description: "Nom de la collection TMDb si le film appartient à une collection."
+
+  - name: stg_tmdb_genres
+    description: "Relations entre les films TMDb et leurs genres."
+    columns:
+      - name: tmdb_id
+        description: "Identifiant du film dans TMDb."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_tmdb_films')
+                field: tmdb_id
+      - name: genre_id
+        description: "Identifiant du genre dans TMDb."
+        data_tests:
+          - not_null
+      - name: genre_name
+        description: "Nom du genre TMDb."
+        data_tests:
+          - not_null
