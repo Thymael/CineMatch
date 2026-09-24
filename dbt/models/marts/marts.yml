@@ -111,5 +111,11 @@ models:
       - name: tmdb_vote_average
         description: "Note moyenne TMDb sur 10."
 
+      - name: tmdb_vote_average_5
+        description: "Note moyenne TMDb ramenée sur une échelle de 5 pour comparaison avec MovieLens."
+
+      - name: rating_gap
+        description: "Écart entre la moyenne MovieLens et la moyenne TMDb ramenée sur 5. Une valeur positive indique une note MovieLens plus élevée."
+
       - name: roi
         description: "Retour sur investissement calculé comme bénéfice divisé par budget lorsque les deux montants sont renseignés."
