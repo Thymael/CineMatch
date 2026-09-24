@@ -139,3 +139,23 @@ models:
         description: "Nom du genre TMDb."
         data_tests:
           - not_null
+
+  - name: stg_tmdb_keywords
+    description: "Relations entre les films TMDb et leurs mots-clés."
+    columns:
+      - name: tmdb_id
+        description: "Identifiant du film dans TMDb."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_tmdb_films')
+                field: tmdb_id
+      - name: keyword_id
+        description: "Identifiant du mot-clé dans TMDb."
+        data_tests:
+          - not_null
+      - name: keyword_name
+        description: "Libellé du mot-clé TMDb."
+        data_tests:
+          - not_null
