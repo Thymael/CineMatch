@@ -40,7 +40,15 @@ joined AS (
         tmdb.adult,
         tmdb.video,
         tmdb.poster_path,
+        CASE
+            WHEN tmdb.poster_path IS NOT NULL
+                THEN CONCAT('https://image.tmdb.org/t/p/w500', tmdb.poster_path)
+        END AS poster_url,
         tmdb.backdrop_path,
+        CASE
+            WHEN tmdb.backdrop_path IS NOT NULL
+                THEN CONCAT('https://image.tmdb.org/t/p/w780', tmdb.backdrop_path)
+        END AS backdrop_url,
         tmdb.homepage,
         tmdb.collection_id,
         tmdb.collection_name
