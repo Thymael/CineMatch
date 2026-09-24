@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: dim_films
+    description: "Dimension des films du prototype CineMatch enrichie avec MovieLens et TMDb."
+    columns:
+      - name: movie_id
+        description: "Identifiant unique du film dans MovieLens."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: tmdb_id
+        description: "Identifiant unique du film dans TMDb."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: imdb_id
+        description: "Identifiant du film dans IMDb."
+
+      - name: title
+        description: "Titre du film utilisé dans le catalogue enrichi."
+        data_tests:
+          - not_null
+
+      - name: release_date
+        description: "Date de sortie du film."
+
+      - name: release_year
+        description: "Année de sortie dérivée de release_date."
+
+      - name: runtime
+        description: "Durée du film en minutes."
+
+      - name: budget
+        description: "Budget déclaré dans TMDb."
+
+      - name: revenue
+        description: "Recettes déclarées dans TMDb."
+
+      - name: profit
+        description: "Différence entre les recettes et le budget déclarés."
+
+      - name: vote_average
+        description: "Note moyenne TMDb."
+
+      - name: vote_count
+        description: "Nombre de votes TMDb."
