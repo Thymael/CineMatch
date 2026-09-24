@@ -119,3 +119,38 @@ models:
 
       - name: roi
         description: "Retour sur investissement calculé comme bénéfice divisé par budget lorsque les deux montants sont renseignés."
+
+  - name: dim_genres
+    description: "Dimension des genres TMDb utilisés par les films du prototype."
+    columns:
+      - name: genre_id
+        description: "Identifiant unique du genre dans TMDb."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: genre_name
+        description: "Nom du genre TMDb."
+        data_tests:
+          - not_null
+
+  - name: bridge_film_genres
+    description: "Table de liaison entre les films du prototype et leurs genres."
+    columns:
+      - name: movie_id
+        description: "Identifiant MovieLens du film."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_films')
+                field: movie_id
+
+      - name: genre_id
+        description: "Identifiant TMDb du genre."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_genres')
+                field: genre_id
