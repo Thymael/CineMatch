@@ -1,0 +1,23 @@
+{
+  "name": "CineMatch Dark",
+  "dataColors": [
+    "#FF6B4A",
+    "#8B5CF6",
+    "#38BDF8",
+    "#22C55E",
+    "#F59E0B",
+    "#EC4899",
+    "#EAB308",
+    "#14B8A6"
+  ],
+  "background": "#0D1017",
+  "foreground": "#F5F7FA",
+  "tableAccent": "#FF6B4A",
+  "good": "#22C55E",
+  "neutral": "#F59E0B",
+  "bad": "#EF4444",
+  "maximum": "#FF6B4A",
+  "center": "#F59E0B",
+  "minimum": "#38BDF8",
+  "null": "#6B7280"
+}
