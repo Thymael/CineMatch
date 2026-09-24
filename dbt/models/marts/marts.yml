@@ -74,3 +74,42 @@ models:
         description: "Date et heure d'enregistrement de la note."
         data_tests:
           - not_null
+
+  - name: mart_film_metrics
+    description: "Indicateurs analytiques par film pour l'EDA et Power BI."
+    columns:
+      - name: movie_id
+        description: "Identifiant unique du film dans MovieLens."
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_films')
+                field: movie_id
+
+      - name: title
+        description: "Titre du film."
+        data_tests:
+          - not_null
+
+      - name: rating_count
+        description: "Nombre de notes MovieLens reçues par le film."
+        data_tests:
+          - not_null
+
+      - name: user_count
+        description: "Nombre d'utilisateurs MovieLens distincts ayant noté le film."
+        data_tests:
+          - not_null
+
+      - name: movielens_rating_average
+        description: "Note moyenne MovieLens sur 5."
+        data_tests:
+          - not_null
+
+      - name: tmdb_vote_average
+        description: "Note moyenne TMDb sur 10."
+
+      - name: roi
+        description: "Retour sur investissement calculé comme bénéfice divisé par budget lorsque les deux montants sont renseignés."
