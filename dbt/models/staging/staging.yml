@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: stg_movielens_movies
+    description: "Catalogue MovieLens nettoyé et standardisé."
+    columns:
+      - name: movie_id
+        description: "Identifiant unique du film dans MovieLens."
+        data_tests:
+          - not_null
+          - unique
+      - name: title
+        description: "Titre du film tel qu'il est fourni par MovieLens."
+        data_tests:
+          - not_null
+      - name: genres
+        description: "Genres MovieLens séparés par le caractère |."
+        data_tests:
+          - not_null
+  
+  - name: stg_movielens_links
+    description: "Correspondances nettoyées entre les identifiants MovieLens, IMDb et TMDb."
+    columns:
+      - name: movie_id
+        description: "Identifiant unique du film dans MovieLens."
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_movielens_movies')
+                field: movie_id
+      - name: imdb_id
+        description: "Identifiant du film dans IMDb."
+      - name: tmdb_id
+        description: "Identifiant du film dans TMDb lorsqu'il est disponible."
+
+
+  - name: stg_movielens_ratings
+    description: "Notes MovieLens standardisées."
+    columns:
+      - name: user_id
+        description: "Identifiant anonymisé de l'utilisateur."
+        data_tests:
+          - not_null
+      - name: movie_id
+        description: "Identifiant du film MovieLens."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_movielens_movies')
+                field: movie_id
+      - name: rating
+        description: "Note attribuée au film, comprise entre 0,5 et 5."
+        data_tests:
+          - not_null
+      - name: rated_at
+        description: "Date et heure auxquelles la note a été enregistrée."
+        data_tests:
+          - not_null
+
+
+  - name: stg_movielens_tags
+    description: "Tags MovieLens nettoyés et standardisés."
+    columns:
+      - name: user_id
+        description: "Identifiant anonymisé de l'utilisateur."
+        data_tests:
+          - not_null
+      - name: movie_id
+        description: "Identifiant du film MovieLens."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_movielens_movies')
+                field: movie_id
+      - name: tag
+        description: "Mot-clé attribué au film par l'utilisateur."
+        data_tests:
+          - not_null
+      - name: tagged_at
+        description: "Date et heure auxquelles le tag a été ajouté."
+        data_tests:
+          - not_null
+    

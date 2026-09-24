@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: cinematch_landing
+    description: "Tables brutes chargées dans BigQuery depuis MovieLens et TMDb."
+
+    database: cinematch-507613
+    schema: cinematch_landing
+
+    tables:
+      - name: movielens_movies
+        description: "Catalogue des films MovieLens avec leur titre et leurs genres."
+
+      - name: movielens_links
+        description: "Correspondances entre les identifiants MovieLens, IMDb et TMDb."
+
+      - name: movielens_ratings
+        description: "Notes attribuées aux films par les utilisateurs MovieLens."
+
+      - name: movielens_tags
+        description: "Tags ajoutés aux films par les utilisateurs MovieLens."
+
+      - name: tmdb_films
+        description: "Informations détaillées des 100 films enrichis avec TMDb."
