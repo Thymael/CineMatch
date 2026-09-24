@@ -29,7 +29,10 @@ joined AS (
         tmdb.runtime,
         tmdb.budget,
         tmdb.revenue,
-        tmdb.revenue - tmdb.budget AS profit,
+        CASE
+            WHEN tmdb.budget > 0 AND tmdb.revenue > 0
+                THEN tmdb.revenue - tmdb.budget
+        END AS profit,
         tmdb.popularity,
         tmdb.vote_average,
         tmdb.vote_count,
