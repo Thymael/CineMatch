@@ -53,7 +53,7 @@ python -m pytest -q
 - [x] Collecte MovieLens et TMDb
 - [x] Stockage dans Google Cloud Storage
 - [x] Chargement et contrôle dans BigQuery
-- [ ] Transformation avec dbt
+- [x] Transformation avec dbt
 - [ ] Analyse exploratoire et Power BI
 - [ ] Modèles de recommandation
 - [ ] Application Streamlit
@@ -62,3 +62,4 @@ python -m pytest -q
 
 - [Cadrage du projet](documentation/00_cadrage_projet_cinematch.md)
 - [Collecte et stockage des données](documentation/01_collecte_donnees.md)
+- [Transformation avec dbt](documentation/02_transformation_dbt.md)
