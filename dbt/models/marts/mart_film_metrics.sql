@@ -39,12 +39,14 @@ final AS (
         END AS roi,
         films.popularity AS tmdb_popularity,
         films.vote_average AS tmdb_vote_average,
+        films.vote_average / 2 AS tmdb_vote_average_5,
         films.vote_count AS tmdb_vote_count,
         rating_metrics.rating_count,
         rating_metrics.user_count,
         rating_metrics.movielens_rating_average,
         rating_metrics.movielens_rating_min,
-        rating_metrics.movielens_rating_max
+        rating_metrics.movielens_rating_max,
+        rating_metrics.movielens_rating_average - (films.vote_average / 2) AS rating_gap
     FROM films
     LEFT JOIN rating_metrics
         ON films.movie_id = rating_metrics.movie_id
