@@ -159,3 +159,51 @@ models:
         description: "Libellé du mot-clé TMDb."
         data_tests:
           - not_null
+
+  - name: stg_tmdb_cast
+    description: "Relations entre les films TMDb et les acteurs présents au casting."
+    columns:
+      - name: tmdb_id
+        description: "Identifiant du film dans TMDb."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_tmdb_films')
+                field: tmdb_id
+      - name: person_id
+        description: "Identifiant de la personne dans TMDb."
+        data_tests:
+          - not_null
+      - name: person_name
+        description: "Nom de la personne au casting."
+        data_tests:
+          - not_null
+      - name: character_name
+        description: "Nom du personnage interprété."
+      - name: cast_order
+        description: "Position de la personne dans l'ordre du casting."
+
+  - name: stg_tmdb_crew
+    description: "Relations entre les films TMDb et les membres de l'équipe technique."
+    columns:
+      - name: tmdb_id
+        description: "Identifiant du film dans TMDb."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_tmdb_films')
+                field: tmdb_id
+      - name: person_id
+        description: "Identifiant de la personne dans TMDb."
+        data_tests:
+          - not_null
+      - name: person_name
+        description: "Nom de la personne dans l'équipe technique."
+        data_tests:
+          - not_null
+      - name: department
+        description: "Département technique du membre d'équipe."
+      - name: job
+        description: "Fonction occupée sur le film."
