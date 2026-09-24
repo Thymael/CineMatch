@@ -154,3 +154,31 @@ models:
               arguments:
                 to: ref('dim_genres')
                 field: genre_id
+
+  - name: bridge_film_cast
+    description: "Casting des films du prototype pour l'affichage dans Power BI."
+    columns:
+      - name: movie_id
+        description: "Identifiant MovieLens du film."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_films')
+                field: movie_id
+
+      - name: person_id
+        description: "Identifiant TMDb de la personne."
+        data_tests:
+          - not_null
+
+      - name: person_name
+        description: "Nom de la personne au casting."
+        data_tests:
+          - not_null
+
+      - name: cast_order
+        description: "Position de la personne dans l'ordre du casting."
+
+      - name: profile_url
+        description: "URL du portrait TMDb utilisée dans Power BI."
