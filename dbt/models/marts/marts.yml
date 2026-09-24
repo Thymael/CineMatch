@@ -47,3 +47,30 @@ models:
 
       - name: vote_count
         description: "Nombre de votes TMDb."
+
+  - name: fct_ratings
+    description: "Notes MovieLens associées aux films du catalogue enrichi CineMatch."
+    columns:
+      - name: user_id
+        description: "Identifiant anonymisé de l'utilisateur MovieLens."
+        data_tests:
+          - not_null
+
+      - name: movie_id
+        description: "Identifiant MovieLens du film noté."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_films')
+                field: movie_id
+
+      - name: rating
+        description: "Note attribuée au film."
+        data_tests:
+          - not_null
+
+      - name: rated_at
+        description: "Date et heure d'enregistrement de la note."
+        data_tests:
+          - not_null
