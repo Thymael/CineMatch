@@ -4,11 +4,11 @@ WITH source AS (
 ),
 unnested AS (
     SELECT
-        CAST(id AS INT64) AS tmdb_id,
+        CAST(source.id AS INT64) AS tmdb_id,
         CAST(genre.id AS INT64) AS genre_id,
         TRIM(genre.name) AS genre_name
     FROM source,
-    UNNEST(genres) AS genre
+    UNNEST(source.genres) AS genre
 )
 SELECT *
 FROM unnested
