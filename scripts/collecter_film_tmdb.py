@@ -10,7 +10,8 @@ from scripts.verifier_connexion_tmdb import requete_tmdb
 
 DOSSIER_MOVIELENS = Path("data/raw/movielens/ml-latest-small")
 DOSSIER_SORTIE = Path("data/raw/tmdb")
-NOMBRE_FILMS = 100
+NOMBRE_FILMS = 2000
+MARGE_FILMS = 20
 PAUSE_ENTRE_REQUETES = 0.2                                      # Évite d'envoyer trop de requêtes
 
 
@@ -64,11 +65,12 @@ def enregistrer_film(film):
 
 
 if __name__ == "__main__":
-    films_selectionnes = selectionner_films(NOMBRE_FILMS)
+    films_selectionnes = selectionner_films(NOMBRE_FILMS + MARGE_FILMS)
 
     films_recuperes = 0
     films_deja_presents = 0
     erreurs = 0
+    films_valides = 0
 
     print(f"\n🎬 Films sélectionnés : {len(films_selectionnes)}")
 
@@ -79,15 +81,24 @@ if __name__ == "__main__":
 
         if chemin.exists():
             films_deja_presents += 1
+            films_valides += 1
+
             print(f"⏭️ [{numero}/{len(films_selectionnes)}] {titre_movielens} déjà présent")
+
+            if films_valides >= NOMBRE_FILMS:
+                break
+
             continue
 
         try:
             film = recuperer_film(film_id)
             chemin = enregistrer_film(film)
             films_recuperes += 1
+            films_valides += 1
 
             print(f"✅ [{numero}/{len(films_selectionnes)}] {film['title']} enregistré")
+            if films_valides >= NOMBRE_FILMS:
+                break
 
         except (ValueError, requests.exceptions.RequestException) as erreur:
             erreurs += 1
