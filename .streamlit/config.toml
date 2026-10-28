@@ -1,0 +1,30 @@
+[theme]
+base = "dark"
+primaryColor = "#C99A3D"
+backgroundColor = "#0B0908"
+secondaryBackgroundColor = "#1B1512"
+textColor = "#F7E8C6"
+linkColor = "#E3B65B"
+borderColor = "#6F542A"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "10px"
+buttonRadius = "full"
+font = "'Montserrat':https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+headingFont = "'Cinzel':https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap"
+headingFontWeights = [700, 700, 600, 600, 600, 600]
+chartCategoricalColors = ["#C99A3D", "#8F1D2C", "#E3B65B", "#6B2D3E", "#F0D58A", "#5D4037"]
+chartSequentialColors = ["#1B1512", "#38271D", "#513723", "#6C4929", "#895D2F", "#A87336", "#C68C3F", "#DDA84F", "#EFC76D", "#FFE6A0"]
+redColor = "#A62936"
+orangeColor = "#C56E33"
+yellowColor = "#D9AE4A"
+greenColor = "#698F62"
+blueColor = "#557A95"
+violetColor = "#795879"
+
+[theme.sidebar]
+backgroundColor = "#160E0D"
+secondaryBackgroundColor = "#2A1817"
+textColor = "#F7E8C6"
+primaryColor = "#D4A84F"
+borderColor = "#6F542A"
