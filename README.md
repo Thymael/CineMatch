@@ -3,6 +3,10 @@
 CinéMatch est un projet data consacré à l'analyse de films et à la recommandation
 personnalisée.
 
+## Voir le projet
+
+- [Application Streamlit, présentation PowerPoint et visuels Power BI](Appli%20Streamlit%2C%20PowerPoint%20et%20visuel%20Power%20BI.md)
+
 ## Objectif
 
 Croiser plusieurs sources cinématographiques afin de construire un pipeline de données,
