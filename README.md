@@ -45,6 +45,7 @@ python -m scripts.verifier_donnees_movielens
 python -m scripts.verifier_connexion_tmdb
 python -m scripts.collecter_film_tmdb
 python -m scripts.preparer_tmdb_bigquery
+python -m streamlit run streamlit_app.py
 python -m pytest -q
 ```
 
@@ -56,7 +57,7 @@ python -m pytest -q
 - [ ] Transformation avec dbt
 - [ ] Analyse exploratoire et Power BI
 - [ ] Modèles de recommandation
-- [ ] Application Streamlit
+- [x] Application Streamlit
 
 ## Documentation
 
